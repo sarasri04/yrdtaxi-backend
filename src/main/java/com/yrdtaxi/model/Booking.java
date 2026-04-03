@@ -1,0 +1,261 @@
+package com.yrdtaxi.model;
+
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "bookings")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Booking {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // 📍 Location
+    private String pickupLocation;
+    private String dropLocation;
+
+    private double pickupLat;
+    private double pickupLng;
+
+    private double dropLat;
+    private double dropLng;
+
+    // 👤 Customer
+    private String customerName;
+    private String customerPhone;
+    private String customerEmail;
+
+    // 🚗 Trip
+    private String tripType; // ONEWAY / ROUND
+    private String cabType;  // MINI / SEDAN / SUV
+
+    private double distance;
+    private double duration;
+
+    // 💰 Fare
+    private double baseFare;
+    private double surgeMultiplier;
+    private double totalFare;
+
+    // 📊 Status
+    private String status; 
+    // REQUESTED, DRIVER_ASSIGNED, ONGOING, COMPLETED, CANCELLED
+
+    // ⏰ Time
+    private LocalDateTime bookingTime;
+    private LocalDateTime pickupTime;
+    private LocalDateTime dropTime;
+
+    // 🚕 Driver
+    @ManyToOne
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
+
+    // 👤 User
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getPickupLocation() {
+		return pickupLocation;
+	}
+
+	public void setPickupLocation(String pickupLocation) {
+		this.pickupLocation = pickupLocation;
+	}
+
+	public String getDropLocation() {
+		return dropLocation;
+	}
+
+	public void setDropLocation(String dropLocation) {
+		this.dropLocation = dropLocation;
+	}
+
+	public double getPickupLat() {
+		return pickupLat;
+	}
+
+	public void setPickupLat(double pickupLat) {
+		this.pickupLat = pickupLat;
+	}
+
+	public double getPickupLng() {
+		return pickupLng;
+	}
+
+	public void setPickupLng(double pickupLng) {
+		this.pickupLng = pickupLng;
+	}
+
+	public double getDropLat() {
+		return dropLat;
+	}
+
+	public void setDropLat(double dropLat) {
+		this.dropLat = dropLat;
+	}
+
+	public double getDropLng() {
+		return dropLng;
+	}
+
+	public void setDropLng(double dropLng) {
+		this.dropLng = dropLng;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getCustomerPhone() {
+		return customerPhone;
+	}
+
+	public void setCustomerPhone(String customerPhone) {
+		this.customerPhone = customerPhone;
+	}
+
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
+
+	public String getTripType() {
+		return tripType;
+	}
+
+	public void setTripType(String tripType) {
+		this.tripType = tripType;
+	}
+
+	public String getCabType() {
+		return cabType;
+	}
+
+	public void setCabType(String cabType) {
+		this.cabType = cabType;
+	}
+
+	public double getDistance() {
+		return distance;
+	}
+
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
+
+	public double getDuration() {
+		return duration;
+	}
+
+	public void setDuration(double duration) {
+		this.duration = duration;
+	}
+
+	public double getBaseFare() {
+		return baseFare;
+	}
+
+	public void setBaseFare(double baseFare) {
+		this.baseFare = baseFare;
+	}
+
+	public double getSurgeMultiplier() {
+		return surgeMultiplier;
+	}
+
+	public void setSurgeMultiplier(double surgeMultiplier) {
+		this.surgeMultiplier = surgeMultiplier;
+	}
+
+	public double getTotalFare() {
+		return totalFare;
+	}
+
+	public void setTotalFare(double totalFare) {
+		this.totalFare = totalFare;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public LocalDateTime getBookingTime() {
+		return bookingTime;
+	}
+
+	public void setBookingTime(LocalDateTime bookingTime) {
+		this.bookingTime = bookingTime;
+	}
+
+	public LocalDateTime getPickupTime() {
+		return pickupTime;
+	}
+
+	public void setPickupTime(LocalDateTime pickupTime) {
+		this.pickupTime = pickupTime;
+	}
+
+	public LocalDateTime getDropTime() {
+		return dropTime;
+	}
+
+	public void setDropTime(LocalDateTime dropTime) {
+		this.dropTime = dropTime;
+	}
+
+	public Driver getDriver() {
+		return driver;
+	}
+
+	public void setDriver(Driver driver) {
+		this.driver = driver;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setStartTime(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		
+	}
+    
+    
+}
+
+
+
+
+
