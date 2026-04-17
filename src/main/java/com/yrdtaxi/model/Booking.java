@@ -1,9 +1,8 @@
 package com.yrdtaxi.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
-
+import com.yrdtaxi.model.BookingStatus;
 import java.time.LocalDateTime;
 
 @Entity
@@ -44,16 +43,41 @@ public class Booking {
     private double surgeMultiplier;
     private double totalFare;
 
-    // 📊 Status
-    private String status; 
-    // REQUESTED, DRIVER_ASSIGNED, ONGOING, COMPLETED, CANCELLED
+    // ✅ Payment flag (correct)
+    
+   
+
+    // 📊 Status (BETTER → ENUM)
+    @Enumerated(EnumType.STRING)
+    private BookingStatus status;
 
     // ⏰ Time
     private LocalDateTime bookingTime;
     private LocalDateTime pickupTime;
     private LocalDateTime dropTime;
 
-    // 🚕 Driver
+    private LocalDateTime startTime;   // ✅ ADD THIS
+    private LocalDateTime endTime;     // ✅ (Recommended)
+
+    
+    
+    public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
+
+	// 🚕 Driver
     @ManyToOne
     @JoinColumn(name = "driver_id")
     private Driver driver;
@@ -199,11 +223,13 @@ public class Booking {
 		this.totalFare = totalFare;
 	}
 
-	public String getStatus() {
+	
+
+	public BookingStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(BookingStatus status) {
 		this.status = status;
 	}
 
@@ -246,14 +272,10 @@ public class Booking {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public void setStartTime(LocalDateTime now) {
-		// TODO Auto-generated method stub
-		
-	}
-    
     
 }
+
+
 
 
 

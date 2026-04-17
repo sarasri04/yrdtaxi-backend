@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/routes")
-@CrossOrigin("*")
+//@CrossOrigin("*")
 public class RouteController {
 
     @Autowired

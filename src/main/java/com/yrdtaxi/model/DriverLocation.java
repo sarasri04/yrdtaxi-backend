@@ -1,5 +1,7 @@
 package com.yrdtaxi.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -14,7 +16,8 @@ public class DriverLocation {
     private double latitude;
     private double longitude;
 
-    @OneToOne
+    
+    @ManyToOne
     private Driver driver;
 
 	public Long getId() {
@@ -47,6 +50,11 @@ public class DriverLocation {
 
 	public void setDriver(Driver driver) {
 		this.driver = driver;
+	}
+
+	public void setTimestamp(LocalDateTime now) {
+		// TODO Auto-generated method stub
+		
 	}
     
 }

@@ -17,7 +17,10 @@ public class DriverService {
 
     @Autowired
     private DriverLocationRepository locationRepo;
-
+ 
+    @Autowired
+    private RatingService ratingService;
+    
     public Driver findNearestDriver(double userLat, double userLng) {
 
         List<DriverLocation> locations = locationRepo.findAll();
@@ -27,7 +30,12 @@ public class DriverService {
 
         for (DriverLocation loc : locations) {
 
-            if (!loc.getDriver().isAvailable()) continue;
+            // ✅ Fix null pointer
+            if (loc.getDriver() == null) continue;
+
+            Driver driver = loc.getDriver();
+
+            if (!driver.isAvailable()) continue;
 
             double distance = DistanceCalculator.calculate(
                     userLat, userLng,
@@ -36,17 +44,22 @@ public class DriverService {
 
             if (distance < minDistance) {
                 minDistance = distance;
-                nearestDriver = loc.getDriver();
+                nearestDriver = driver;
             }
         }
 
         return nearestDriver;
     }
 
-	public Driver getDriverById(Long driverId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Driver getDriverById(Long driverId) {
+        return driverRepo.findById(driverId)
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+    }
+    
+    public double getDriverRating(Long driverId) {
+        return ratingService.getAverageRating(driverId);
+    }
+	
 }
 
 

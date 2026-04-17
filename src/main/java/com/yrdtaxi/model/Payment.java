@@ -2,7 +2,9 @@ package com.yrdtaxi.model;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -13,9 +15,13 @@ public class Payment {
     private Long id;
 
     private double amount;
+
     private String status; // SUCCESS / FAILED
 
-    @OneToOne
+    private LocalDateTime paymentTime; // ✅ FIXED
+
+    @ManyToOne
+    @JoinColumn(name = "booking_id", referencedColumnName = "id")
     private Booking booking;
 
 	public Long getId() {
@@ -42,6 +48,14 @@ public class Payment {
 		this.status = status;
 	}
 
+	public LocalDateTime getPaymentTime() {
+		return paymentTime;
+	}
+
+	public void setPaymentTime(LocalDateTime paymentTime) {
+		this.paymentTime = paymentTime;
+	}
+
 	public Booking getBooking() {
 		return booking;
 	}
@@ -51,5 +65,6 @@ public class Payment {
 	}
     
 }
+
 
 
