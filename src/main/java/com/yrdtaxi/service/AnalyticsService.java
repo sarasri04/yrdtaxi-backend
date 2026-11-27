@@ -1,7 +1,7 @@
 package com.yrdtaxi.service;
 
 
-import com.yrdtaxi.model.BookingStatus;
+
 import com.yrdtaxi.repository.BookingRepository;
 import com.yrdtaxi.repository.DriverRepository;
 import com.yrdtaxi.repository.PaymentRepository;
@@ -43,7 +43,7 @@ public class AnalyticsService {
     public long completedRides() {
         return bookingRepo.findAll()
                 .stream()
-                .filter(b -> b.getStatus() == BookingStatus.COMPLETED)
+                .filter(b -> "COMPLETED".equals(b.getStatus()))
                 .count();
     }
 
@@ -51,7 +51,7 @@ public class AnalyticsService {
     public long cancelledRides() {
         return bookingRepo.findAll()
                 .stream()
-                .filter(b -> b.getStatus() == BookingStatus.CANCELLED)
+                .filter(b -> "CANCELLED".equals(b.getStatus()))
                 .count();
     }
 }

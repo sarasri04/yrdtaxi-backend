@@ -2,7 +2,8 @@ package com.yrdtaxi.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import com.yrdtaxi.model.BookingStatus;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -37,6 +38,15 @@ public class Booking {
 
     private double distance;
     private double duration;
+    
+    @Column(nullable = true)
+    private Double driverBata = 0.0;
+
+    @Column(nullable = true)
+    private Double tollFees = 0.0;
+    
+    @Column(nullable = true)
+    private Boolean paid = false;
 
     // 💰 Fare
     private double baseFare;
@@ -48,17 +58,70 @@ public class Booking {
    
 
     // 📊 Status (BETTER → ENUM)
-    @Enumerated(EnumType.STRING)
-    private BookingStatus status;
+   // @Enumerated(EnumType.STRING)
+    //private BookingStatus status;
+    private String status;
 
-    // ⏰ Time
+    public Double getDriverBata() {
+        return driverBata;
+    }
+
+    public void setDriverBata(Double driverBata) {
+        this.driverBata = driverBata;
+    }
+
+    public Double getTollFees() {
+        return tollFees;
+    }
+
+    public void setTollFees(Double tollFees) {
+        this.tollFees = tollFees;
+    }
+
+    public Boolean getPaid() {
+        return paid;
+    }
+
+    public void setPaid(Boolean paid) {
+        this.paid = paid;
+    }
+    
+    private Integer etaMinutes = 15;
+
+	public Integer getEtaMinutes() {
+		return etaMinutes;
+	}
+
+	public void setEtaMinutes(Integer etaMinutes) {
+		this.etaMinutes = etaMinutes;
+	}
+
+	// ⏰ Time
     private LocalDateTime bookingTime;
     private LocalDateTime pickupTime;
     private LocalDateTime dropTime;
 
     private LocalDateTime startTime;   // ✅ ADD THIS
     private LocalDateTime endTime;     // ✅ (Recommended)
+    
+    private LocalDate pickupDate;
+    public LocalDate getPickupDate() {
+		return pickupDate;
+	}
 
+	public void setPickupDate(LocalDate pickupDate) {
+		this.pickupDate = pickupDate;
+	}
+
+	public LocalDate getReturnDate() {
+		return returnDate;
+	}
+
+	public void setReturnDate(LocalDate returnDate) {
+		this.returnDate = returnDate;
+	}
+
+	private LocalDate returnDate;
     
     
     public LocalDateTime getStartTime() {
@@ -75,6 +138,37 @@ public class Booking {
 
 	public void setEndTime(LocalDateTime endTime) {
 		this.endTime = endTime;
+	}
+	
+	@Column(nullable = true)
+	private Boolean rated = false;
+
+	public Boolean getRated() {
+	    return rated;
+	}
+
+	public void setRated(Boolean rated) {
+	    this.rated = rated;
+	}
+	
+	
+	private String rideOtp;
+	private Boolean otpVerified = false;
+
+	public String getRideOtp() {
+		return rideOtp;
+	}
+
+	public void setRideOtp(String rideOtp) {
+		this.rideOtp = rideOtp;
+	}
+
+	public Boolean getOtpVerified() {
+		return otpVerified;
+	}
+
+	public void setOtpVerified(Boolean otpVerified) {
+		this.otpVerified = otpVerified;
 	}
 
 	// 🚕 Driver
@@ -223,15 +317,14 @@ public class Booking {
 		this.totalFare = totalFare;
 	}
 
-	
-
-	public BookingStatus getStatus() {
-		return status;
+	public String getStatus() {
+	    return status;
 	}
 
-	public void setStatus(BookingStatus status) {
-		this.status = status;
+	public void setStatus(String status) {
+	    this.status = status;
 	}
+
 
 	public LocalDateTime getBookingTime() {
 		return bookingTime;
@@ -272,6 +365,10 @@ public class Booking {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
+
+
     
 }
 

@@ -9,7 +9,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RouteRepository extends JpaRepository<RoutePricing, Long> {
 	
-	 Optional<RoutePricing> findByFromLocationAndToLocation(String from, String to);
+	Optional<RoutePricing> findByFromLocationIgnoreCaseAndToLocationIgnoreCase(
+	        String fromLocation,
+	        String toLocation
+	);
 }
 
 

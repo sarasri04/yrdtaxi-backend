@@ -34,5 +34,11 @@ public class RouteController {
                                 @RequestParam String to) {
         return routeService.getRoute(from, to);
     }
+    
+    @DeleteMapping("/{id}")
+    public String deleteRoute(@PathVariable Long id) {
+        routeService.deleteRoute(id);
+        return "Route deleted successfully";
+    }
 }
 

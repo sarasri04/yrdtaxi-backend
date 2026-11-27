@@ -33,6 +33,10 @@ public class RouteService {
                 .findFirst()
                 .orElse(null);
     }
+    
+    public void deleteRoute(Long id) {
+        routeRepo.deleteById(id);
+    }
 }
 
 
